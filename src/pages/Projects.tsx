@@ -1,9 +1,10 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, Plus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import ProjectCard from '../components/dashboard/ProjectCard';
 
 const Projects = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
 
@@ -78,7 +79,10 @@ const Projects = () => {
           <h1 className="text-2xl font-bold text-foreground">Projects</h1>
           <p className="text-muted-foreground">Manage all projects and their allocations</p>
         </div>
-        <button className="flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+        <button 
+          onClick={() => navigate('/create-project')}
+          className="flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+        >
           <Plus className="h-4 w-4 mr-2" />
           Create Project
         </button>
@@ -144,7 +148,6 @@ const Projects = () => {
           <ProjectCard 
             key={project.id} 
             project={project} 
-            onClick={() => console.log('View project:', project.id)}
           />
         ))}
       </div>

@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Calendar, Users, AlertTriangle, CheckCircle } from 'lucide-react';
 
 interface Project {
@@ -19,10 +19,15 @@ interface Project {
 
 interface ProjectCardProps {
   project: Project;
-  onClick: () => void;
 }
 
-const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
+const ProjectCard = ({ project }: ProjectCardProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/projects/${project.id}`);
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'NEW': return 'bg-blue-100 text-blue-800 border-blue-200';
@@ -35,7 +40,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
   return (
     <div 
       className="bg-card border border-border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
-      onClick={onClick}
+      onClick={handleClick}
     >
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-lg font-semibold text-foreground">{project.name}</h3>
