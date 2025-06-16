@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import EngineerProfile from "./pages/EngineerProfile";
 import Alerts from "./pages/Alerts";
 import History from "./pages/History";
+import AddEngineer from "./pages/AddEngineer";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,11 @@ const App = () => (
           <Route path="/profile" element={
             <Layout userRole="engineer">
               <EngineerProfile />
+            </Layout>
+          } />
+          <Route path="/add-engineer" element={
+            <Layout userRole="engineer">
+              <AddEngineer />
             </Layout>
           } />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
