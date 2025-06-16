@@ -2,6 +2,7 @@
 import React from 'react';
 import { Users, FolderOpen, Plus, BarChart3, Calendar, Settings, User, Bell } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { Badge } from '@/components/ui/badge';
 
 interface SidebarProps {
   userRole: 'hr' | 'lead' | 'engineer';
@@ -10,13 +11,16 @@ interface SidebarProps {
 const Sidebar = ({ userRole }: SidebarProps) => {
   const location = useLocation();
   
+  // Mock data for new alerts count - in real app this would come from state/API
+  const newAlertsCount = 2;
+  
   const menuItems = [
     { path: '/', icon: BarChart3, label: 'Dashboard', roles: ['hr', 'lead', 'engineer'] },
     { path: '/projects', icon: FolderOpen, label: 'Projects', roles: ['hr', 'lead', 'engineer'] },
     { path: '/engineers', icon: Users, label: 'Engineers', roles: ['hr', 'lead'] },
     { path: '/create-project', icon: Plus, label: 'Create Project', roles: ['hr'] },
     { path: '/assignments', icon: Calendar, label: 'Assignments', roles: ['hr', 'lead'] },
-    { path: '/alerts', icon: Bell, label: 'Alerts', roles: ['hr'] },
+    { path: '/alerts', icon: Bell, label: 'Alerts', roles: ['hr'], hasNotification: newAlertsCount > 0, notificationCount: newAlertsCount },
     { path: '/profile', icon: User, label: 'My Profile', roles: ['engineer', 'lead'] },
     { path: '/settings', icon: Settings, label: 'Settings', roles: ['hr', 'lead', 'engineer'] },
   ];
@@ -38,14 +42,21 @@ const Sidebar = ({ userRole }: SidebarProps) => {
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+                  className={`flex items-center justify-between space-x-3 px-3 py-2 rounded-lg transition-colors ${
                     isActive 
                       ? 'bg-primary text-primary-foreground' 
                       : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                   }`}
                 >
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.label}</span>
+                  <div className="flex items-center space-x-3">
+                    <item.icon className="h-5 w-5" />
+                    <span>{item.label}</span>
+                  </div>
+                  {item.hasNotification && (
+                    <Badge variant="destructive" className="text-xs min-w-5 h-5 flex items-center justify-center p-1">
+                      {item.notificationCount}
+                    </Badge>
+                  )}
                 </Link>
               </li>
             );
