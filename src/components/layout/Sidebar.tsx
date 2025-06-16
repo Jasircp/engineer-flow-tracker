@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users, FolderOpen, Plus, BarChart3, Calendar, Settings, User } from 'lucide-react';
+import { Users, FolderOpen, Plus, BarChart3, Calendar, Settings, User, Bell } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface SidebarProps {
@@ -16,6 +16,7 @@ const Sidebar = ({ userRole }: SidebarProps) => {
     { path: '/engineers', icon: Users, label: 'Engineers', roles: ['hr', 'lead'] },
     { path: '/create-project', icon: Plus, label: 'Create Project', roles: ['hr'] },
     { path: '/assignments', icon: Calendar, label: 'Assignments', roles: ['hr', 'lead'] },
+    { path: '/alerts', icon: Bell, label: 'Alerts', roles: ['hr'] },
     { path: '/profile', icon: User, label: 'My Profile', roles: ['engineer', 'lead'] },
     { path: '/settings', icon: Settings, label: 'Settings', roles: ['hr', 'lead', 'engineer'] },
   ];
