@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import EngineerProfile from "./pages/EngineerProfile";
 import Alerts from "./pages/Alerts";
+import History from "./pages/History";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,11 @@ const App = () => (
           <Route path="/alerts" element={
             <Layout userRole="hr">
               <Alerts />
+            </Layout>
+          } />
+          <Route path="/history" element={
+            <Layout userRole="hr">
+              <History />
             </Layout>
           } />
           <Route path="/profile" element={
